@@ -31,6 +31,11 @@ import numpy as np
 #import seaborn as sb
 #import math
 
+with header: 
+        st.Title('Flight Delay Predict')
+
+
+
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
@@ -103,9 +108,6 @@ header = st.beta_container()
 dataset = st.beta_container()
 features = st.beta_container()
 modelTraining = st.beta_container()
-
-with header: 
-        st.Title('Flight Delay Predict')
 
 
 
