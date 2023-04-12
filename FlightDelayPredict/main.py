@@ -62,58 +62,58 @@ def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
     return day_of_year / 365
 
-def data_setup():
-    airports_df = pd.read_csv('airports.csv')
-    airlines_df = pd.read_csv('airlines.csv')
-    ontime_10423 = pd.read_csv('ontime_10423.csv')
+#data_setup():
+airports_df = pd.read_csv('airports.csv')
+airlines_df = pd.read_csv('airlines.csv')
+ontime_10423 = pd.read_csv('ontime_10423.csv')
 
 
-    with custom_object_scope({'rmse': rmse}):
-        print("About to load y1")
-        modely1 = load_model('modely1.h5')
-        print("Load done y1")
-        modely2 = load_model('modely2.h5')
+with custom_object_scope({'rmse': rmse}):
+    print("About to load y1")
+    modely1 = load_model('modely1.h5')
+    print("Load done y1")
+    modely2 = load_model('modely2.h5')
 
 
-    #Setting up the input matrix
+#Setting up the input matrix
 
-    X_data = ontime_10423.iloc[:,:-64]
-    X_data.drop(['ORIGIN_AIRPORT_ID','DEP_DELAY','CANCELLED'], axis=1, inplace=True)
-    collist = X_data.columns.tolist()
-    #input_df = pd.DataFrame({'feature': collist, 'val': 0* len(collist)})
+X_data = ontime_10423.iloc[:,:-64]
+X_data.drop(['ORIGIN_AIRPORT_ID','DEP_DELAY','CANCELLED'], axis=1, inplace=True)
+collist = X_data.columns.tolist()
+#input_df = pd.DataFrame({'feature': collist, 'val': 0* len(collist)})
 
-    #first_row = input_df.iloc[0]
-    #input_df = input_df.iloc[1:]
-    #input_df = input_df.append(first_row, ignore_index=True)
+#first_row = input_df.iloc[0]
+#input_df = input_df.iloc[1:]
+#input_df = input_df.append(first_row, ignore_index=True)
 
 
-    #creating a list of airlines for users to pick from
-    airline_list = []
-    for col in collist:
-        if col.startswith('OP_UNIQUE_CARRIER_'):
-            airline_list.append(col.replace('OP_UNIQUE_CARRIER_', ''))
+#creating a list of airlines for users to pick from
+airline_list = []
+for col in collist:
+    if col.startswith('OP_UNIQUE_CARRIER_'):
+        airline_list.append(col.replace('OP_UNIQUE_CARRIER_', ''))
 
-    #creating a dictionary to map OP_UNIQUE_CARRIER to CARRIER_NAME
-    carrier_dict = airlines_df.set_index('OP_UNIQUE_CARRIER')['CARRIER_NAME'].to_dict()
+#creating a dictionary to map OP_UNIQUE_CARRIER to CARRIER_NAME
+carrier_dict = airlines_df.set_index('OP_UNIQUE_CARRIER')['CARRIER_NAME'].to_dict()
 
-    #using the map function to replace the values in airline_list
-    airline_list = [carrier_dict.get(airline, airline) for airline in airline_list]
+#using the map function to replace the values in airline_list
+airline_list = [carrier_dict.get(airline, airline) for airline in airline_list]
 
-    #creating a list of destination airports for users to pick from
-    airport_list = []
-    for col in collist:
-        if col.startswith('DEST_AIRPORT_ID_'):
-            airport_list.append(col.replace('DEST_AIRPORT_ID_', ''))
-    airport_list = pd.Series(airport_list).astype('int64').tolist()
+#creating a list of destination airports for users to pick from
+airport_list = []
+for col in collist:
+    if col.startswith('DEST_AIRPORT_ID_'):
+        airport_list.append(col.replace('DEST_AIRPORT_ID_', ''))
+airport_list = pd.Series(airport_list).astype('int64').tolist()
 
-    #creating a dictionary to map AIRPORT_ID to DISPLAY_AIRPORT_NAME
-    airport_dict = airports_df.set_index('AIRPORT_ID')['DISPLAY_AIRPORT_NAME'].to_dict()
+#creating a dictionary to map AIRPORT_ID to DISPLAY_AIRPORT_NAME
+airport_dict = airports_df.set_index('AIRPORT_ID')['DISPLAY_AIRPORT_NAME'].to_dict()
 
-    #using the map function to replace the values in airport_list
-    airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
+#using the map function to replace the values in airport_list
+airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
 
-data_setup()
-print("Data setup done")
+
+
 #user input prediction function
 def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the last 
 

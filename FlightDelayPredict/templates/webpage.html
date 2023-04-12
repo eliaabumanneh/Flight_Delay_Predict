@@ -9,15 +9,15 @@
     <form method="post">
       <label for="airport">Airport:</label>
       <select name="airport" id="airport">
-        {% for i in range(len(airport_list)) %}
-          <option value="{{ i }}">{{ airport_list[i] }}</option>
+        {% for airport in airport_list %}
+          <option value="{{ loop.index0 }}">{{ airport }}</option>
         {% endfor %}
       </select>
       <br><br>
       <label for="airline">Airline:</label>
       <select name="airline" id="airline">
-        {% for i in range(len(airline_list)) %}
-          <option value="{{ i }}">{{ airline_list[i] }}</option>
+        {% for airline in airline_list %}
+          <option value="{{ loop.index0 }}">{{ airline }}</option>
         {% endfor %}
       </select>
       <br><br>
@@ -31,6 +31,7 @@
     {% endif %}
   </body>
 </html>
+
 
 
 
