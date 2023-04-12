@@ -63,7 +63,7 @@ from pathlib import Path
 csv_dir = Path('.')
 
 # read in the airports, airlines, and ontime CSV files using the Path object
-airports_df = pd.read_csv(csv_dir / 'airports.csv')
+airports_df = Path(__file__) / 'airports.csv'
 airlines_df = pd.read_csv(csv_dir / 'airlines.csv')
 ontime_10423 = pd.read_csv(csv_dir / 'ontime_10423.csv')
 
