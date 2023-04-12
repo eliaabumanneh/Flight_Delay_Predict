@@ -57,7 +57,8 @@ with input:
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
-ontime_10423 = pd.read_csv('/app/portfolio_a/ontime_10423.csv')
+ontime_10423 = pd.read_csv('ontime_10423.csv')
+st.write(ontime_10423.head(3))
 airports_df = pd.read_csv('airports.csv')
 airlines_df = pd.read_csv('airlines.csv')
 
