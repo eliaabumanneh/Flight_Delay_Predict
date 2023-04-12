@@ -122,3 +122,5 @@ cancellation_pred = cancellation_pred[2:-7]
 
 print("Expected Delay for this flight is: " + str(delay_pred) + " Minutes")
 print("Expected Probability of Cancellation for this flight is: " + str(cancellation_pred))
+
+sleep(20)
