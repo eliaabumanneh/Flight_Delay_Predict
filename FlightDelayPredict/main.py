@@ -76,7 +76,9 @@ def data_setup():
 
 
     with custom_object_scope({'rmse': rmse}):
+        print("About to load y1")
         modely1 = load_model('modely1.h5')
+        print("Load done y1")
         modely2 = load_model('modely2.h5')
 
 
