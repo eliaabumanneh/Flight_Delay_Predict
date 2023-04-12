@@ -112,6 +112,7 @@ def data_setup():
     #using the map function to replace the values in airport_list
     airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
     print("Data loading is done!")
+    return airport_list, airline_list
 
 
 
@@ -162,15 +163,16 @@ def run_pred(input_dest, input_airline):
 app = Flask(__name__)
 @app.route('/')
 def temp():
-    data_setup()
     print("this is temp")
     return render_template('webpage.html')
 
 @app.route('/',methods=['POST','GET'])
 def index():
-    data_setup()
     print("This is index")
     if request.method == "POST":
+
+        airport_list, airline_list = data_setup()
+        
         airport_index = int(request.form["airport"])
         airline_index = int(request.form["airline"])
 
