@@ -62,11 +62,8 @@ ontime_10423 = Path(__file__) / 'ontime_10423.csv'
 
 
 with custom_object_scope({'rmse': rmse}):
-    @st.cache(allow_output_mutation=True)
-    def load_model():
-        model = load_model('modely1.h5')
-        model.load_weights('modely1.h5')
-        return model
+    from keras.models import load_model
+    modely1 = load_model('modely1.h5')
     
 load_model()
 
