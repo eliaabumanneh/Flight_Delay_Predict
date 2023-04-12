@@ -2,7 +2,6 @@ import streamlit as st
 import os
 import pandas as pd
 import numpy as np
-from tqdm import tqdm
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.utils import shuffle
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
