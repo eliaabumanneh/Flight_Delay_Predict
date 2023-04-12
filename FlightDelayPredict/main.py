@@ -126,23 +126,6 @@ def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the las
 
     return transformed_delay_prediction, cancellation_prediction
 
-print()
-
-##################################################################################################
-app = Flask(__name__)
-@app.route('/')
-def temp():
-    return render_template('webpage.html')
-
-
-@app.route('/',methods=['POST','GET'])
-def get_input():
-    if request.method == 'POST':
-        info = request.form['search']
-        return redirect(url_for('run_pred',values=info))
-    
-@app.route('/run_pred/<values>')
-
 
 
 def run_pred(values):
@@ -176,5 +159,29 @@ def run_pred(values):
 
     return "Expected Delay for this flight is: " + str(delay_pred) + " Minutes", "Expected Probability of Cancellation for this flight is: " + str(cancellation_pred)
 
+
+##################################################################################################
+app = Flask(__name__)
+@app.route('/')
+def temp():
+    return render_template('webpage.html')
+
+
+@app.route('/',methods=['POST','GET'])
+def index():
+    if request.method == "POST":
+        airport_index = int(request.form["airport"])
+        airline_index = int(request.form["airline"])
+        selected_airport = airport_list[airport_index]
+        selected_airline = airline_list[airline_index]
+
+        # Make prediction based on selected values
+        delay = predict_delay(selected_airport, selected_airline)
+        cancellation = predict_cancellation(selected_airport, selected_airline)
+
+        return render_template("index.html", airport_list=airport_list, airline_list=airline_list, delay=delay, cancellation=cancellation)
+    else:
+        return render_template("index.html", airport_list=airport_list, airline_list=airline_list)
+   
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5010, debug=True, threaded=True)
