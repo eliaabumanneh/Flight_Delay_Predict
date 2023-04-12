@@ -27,6 +27,7 @@ import seaborn as sns
 from datetime import datetime
 import seaborn as sb
 import math
+from pathlib import Path
 
 
 #Streamlit Componenets
@@ -52,20 +53,12 @@ with input:
     selected_index = st.selectbox('Select an airline:', airline_list)
 
 
-
-
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
-from pathlib import Path
-
-# create a Path object for the directory containing the CSV files
-csv_dir = Path('.')
-
-# read in the airports, airlines, and ontime CSV files using the Path object
 airports_df = Path(__file__) / 'airports.csv'
-airlines_df = pd.read_csv(csv_dir / 'airlines.csv')
-ontime_10423 = pd.read_csv(csv_dir / 'ontime_10423.csv')
+airlines_df = Path(__file__) / 'airlines.csv'
+ontime_10423 = Path(__file__) / 'ontime_10423.csv'
 
 #airports_df = pd.read_csv('airports/csv')
 #airlines_df = pd.read_csv('airlines.csv')
