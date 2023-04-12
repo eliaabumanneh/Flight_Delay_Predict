@@ -56,18 +56,76 @@ import pickle
 #with input:
 #    selected_index = st.selectbox('Select an airline:', airline_list)
 
+app = Flask(__name__)
+@app.route('/')
 
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
+def yeartodate_scaled():
+    day_of_year = datetime.now().timetuple().tm_yday
+    return day_of_year / 365
 
-airports_df = pd.read_csv('airports.csv')
-airlines_df = pd.read_csv('airlines.csv')
-ontime_10423 = pd.read_csv('ontime_10423.csv')
+
+def temp():
+    return render_template('template.html')
+
+def data_setup():
+    airports_df = pd.read_csv('airports.csv')
+    airlines_df = pd.read_csv('airlines.csv')
+    ontime_10423 = pd.read_csv('ontime_10423.csv')
 
 
-with custom_object_scope({'rmse': rmse}):
-    modely1 = load_model('modely1.h5')
-    modely2 = load_model('modely1.h5')
+    with custom_object_scope({'rmse': rmse}):
+        modely1 = load_model('modely1.h5')
+        modely2 = load_model('modely2.h5')
+
+
+    #Setting up the input matrix
+
+    X_data = ontime_10423.iloc[:,:-64]
+    X_data.drop(['ORIGIN_AIRPORT_ID','DEP_DELAY','CANCELLED'], axis=1, inplace=True)
+    collist = X_data.columns.tolist()
+    input_df = pd.DataFrame({'feature': collist, 'val': 0* len(collist)})
+
+    first_row = input_df.iloc[0]
+    input_df = input_df.iloc[1:]
+    input_df = input_df.append(first_row, ignore_index=True)
+
+
+    #creating a list of airlines for users to pick from
+    airline_list = []
+    for col in collist:
+        if col.startswith('OP_UNIQUE_CARRIER_'):
+            airline_list.append(col.replace('OP_UNIQUE_CARRIER_', ''))
+
+    #creating a dictionary to map OP_UNIQUE_CARRIER to CARRIER_NAME
+    carrier_dict = airlines_df.set_index('OP_UNIQUE_CARRIER')['CARRIER_NAME'].to_dict()
+
+    #using the map function to replace the values in airline_list
+    airline_list = [carrier_dict.get(airline, airline) for airline in airline_list]
+
+    #creating a list of destination airports for users to pick from
+    airport_list = []
+    for col in collist:
+        if col.startswith('DEST_AIRPORT_ID_'):
+            airport_list.append(col.replace('DEST_AIRPORT_ID_', ''))
+    airport_list = pd.Series(airport_list).astype('int64').tolist()
+
+    #creating a dictionary to map AIRPORT_ID to DISPLAY_AIRPORT_NAME
+    airport_dict = airports_df.set_index('AIRPORT_ID')['DISPLAY_AIRPORT_NAME'].to_dict()
+
+    #using the map function to replace the values in airport_list
+    airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
+
+data_setup()
+
+@app.route('/',methods=['POST','GET'])
+def get_input():
+    if request.method == 'POST':
+        info = request.form['search']
+        return redirect(url_for('run_pred',values=info))
+    
+@app.route('/run_pred/<values>')
 
 #user input prediction function
 def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the last 
@@ -81,69 +139,37 @@ def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the las
 
     return transformed_delay_prediction, cancellation_prediction
 
-#Setting up the input matrix
-
-X_data = ontime_10423.iloc[:,:-64]
-X_data.drop(['ORIGIN_AIRPORT_ID','DEP_DELAY','CANCELLED'], axis=1, inplace=True)
-collist = X_data.columns.tolist()
-input_df = pd.DataFrame({'feature': collist, 'val': 0* len(collist)})
-
-first_row = input_df.iloc[0]
-input_df = input_df.iloc[1:]
-input_df = input_df.append(first_row, ignore_index=True)
+def run_pred(values):
+    input_df['val'] = 0 
+    values = [int(val) for val in values.split('.')]
+    input_airline = values[0]
+    input_airline = values[1]
 
 
-#creating a list of airlines for users to pick from
-airline_list = []
-for col in collist:
-    if col.startswith('OP_UNIQUE_CARRIER_'):
-        airline_list.append(col.replace('OP_UNIQUE_CARRIER_', ''))
 
-#creating a dictionary to map OP_UNIQUE_CARRIER to CARRIER_NAME
-carrier_dict = airlines_df.set_index('OP_UNIQUE_CARRIER')['CARRIER_NAME'].to_dict()
+    #SAMPLE INPUT
+    input_df['val'] = 0      #Resetting input
+    input_airline = 9       #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
+    input_dest = 2         #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
 
-#using the map function to replace the values in airline_list
-airline_list = [carrier_dict.get(airline, airline) for airline in airline_list]
+    #EXECUTION
 
-#creating a list of destination airports for users to pick from
-airport_list = []
-for col in collist:
-    if col.startswith('DEST_AIRPORT_ID_'):
-        airport_list.append(col.replace('DEST_AIRPORT_ID_', ''))
-airport_list = pd.Series(airport_list).astype('int64').tolist()
+    input_df.iloc[input_airline,1] = 1          #Executes the addition of airline to input
+    input_df.iloc[input_dest+17,1] = 1          #Executes the addition of airport to input
+    input_df.iloc[-1,-1] = round(yeartodate_scaled(),3)  #Executes the addition of scaled YTD
 
-#creating a dictionary to map AIRPORT_ID to DISPLAY_AIRPORT_NAME
-airport_dict = airports_df.set_index('AIRPORT_ID')['DISPLAY_AIRPORT_NAME'].to_dict()
+    X_input = np.array(input_df.iloc[:,1]).reshape(-1,43)
 
-#using the map function to replace the values in airport_list
-airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
+    #test prediction
+    prediction = user_pred(X_input)
+    delay_pred = str(prediction[0])
+    delay_pred = delay_pred[2:-8]
 
+    #output to be sent to user
+    cancellation_pred = str(prediction[1])
+    cancellation_pred = cancellation_pred[2:-7]
 
-def yeartodate_scaled():
-    day_of_year = datetime.now().timetuple().tm_yday
-    return day_of_year / 365
+    return "Expected Delay for this flight is: " + str(delay_pred) + " Minutes", "Expected Probability of Cancellation for this flight is: " + str(cancellation_pred)
 
-#SAMPLE INPUT
-input_df['val'] = 0      #Resetting input
-input_airline = 9       #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
-input_dest = 2         #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
-
-#EXECUTION
-
-input_df.iloc[input_airline,1] = 1          #Executes the addition of airline to input
-input_df.iloc[input_dest+17,1] = 1          #Executes the addition of airport to input
-input_df.iloc[-1,-1] = round(yeartodate_scaled(),3)  #Executes the addition of scaled YTD
-
-X_input = np.array(input_df.iloc[:,1]).reshape(-1,43)
-
-#test prediction
-prediction = user_pred(X_input)
-delay_pred = str(prediction[0])
-delay_pred = delay_pred[2:-8]
-
-#output to be sent to user
-cancellation_pred = str(prediction[1])
-cancellation_pred = cancellation_pred[2:-7]
-
-print("Expected Delay for this flight is: " + str(delay_pred) + " Minutes")
-print("Expected Probability of Cancellation for this flight is: " + str(cancellation_pred))
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5010, debug=True, threaded=True)
