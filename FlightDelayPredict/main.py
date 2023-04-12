@@ -44,8 +44,11 @@ with header:
     st.write('Elia Abu-Manneh')
     st.write('April 12 2023')
 
+airline_list = ['Delta', 'United', 'American', 'Southwest']
+
+
 with input:
-    user_input_airline = sel_col.selectbox('Enter Airline', options =[], index = 9999)
+    selected_index = st.selectbox('Select an airline:', airline_list)
 
 
 
