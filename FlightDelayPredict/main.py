@@ -161,11 +161,13 @@ def run_pred(input_dest, input_airline):
 
 ##################################################################################################
 app = Flask(__name__)
+
+airport_list, airline_list = data_setup()
+print("Data setup completed")
+
 @app.route('/')
 def temp():
     print("this is temp")
-
-    airport_list, airline_list = data_setup()
 
     return render_template('webpage.html')
 
@@ -174,7 +176,7 @@ def index():
     print("This is index")
     if request.method == "POST":
 
-        airport_list, airline_list = data_setup()
+        
         
         airport_index = int(request.form["airport"])
         airline_index = int(request.form["airline"])
