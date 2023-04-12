@@ -163,7 +163,6 @@ app = Flask(__name__)
 def temp():
     return render_template('webpage.html')
 
-
 @app.route('/',methods=['POST','GET'])
 def index():
     if request.method == "POST":
@@ -176,7 +175,6 @@ def index():
         return render_template("index.html", airport_list=airport_list, airline_list=airline_list, delay=delay, cancellation=cancellation)
     else:
         return render_template("index.html", airport_list=airport_list, airline_list=airline_list)
-
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5010, debug=True, threaded=True)
