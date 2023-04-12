@@ -56,11 +56,13 @@ import pickle
 #with input:
 #    selected_index = st.selectbox('Select an airline:', airline_list)
 
+def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
+    return K.sqrt(K.mean(K.square(y_pred - y_true)))
+
 app = Flask(__name__)
 @app.route('/')
 
-def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
-    return K.sqrt(K.mean(K.square(y_pred - y_true)))
+
 def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
     return day_of_year / 365
