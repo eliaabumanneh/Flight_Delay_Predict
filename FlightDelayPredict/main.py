@@ -164,6 +164,9 @@ app = Flask(__name__)
 @app.route('/')
 def temp():
     print("this is temp")
+
+    airport_list, airline_list = data_setup()
+
     return render_template('webpage.html')
 
 @app.route('/',methods=['POST','GET'])
