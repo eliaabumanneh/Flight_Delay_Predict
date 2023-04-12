@@ -13,7 +13,7 @@ from keras.models import Sequential
 from keras.callbacks import Callback, ReduceLROnPlateau, EarlyStopping
 from tensorflow.keras.losses import SparseCategoricalCrossentropy, CategoricalCrossentropy
 from tensorflow.keras import datasets, layers, models
-from IPython.display import clear_output
+#from IPython.display import clear_output
 import matplotlib.pyplot as plt
 import tensorflow.keras.backend as K
 import keras.backend as K
@@ -25,8 +25,6 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 np.random.seed(0)
 import seaborn as sns
 from datetime import datetime
-import PIL
-from PIL import Image
 import seaborn as sb
 import math
 
