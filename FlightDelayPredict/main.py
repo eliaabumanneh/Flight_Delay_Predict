@@ -128,12 +128,9 @@ def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the las
 
 
 
-def run_pred(values):
-    values = [int(val) for val in values.split('.')] #from Joseph Peart's code
+def run_pred(input_dest, input_airline):
 
     new_list = [0]*len(collist) #Resetting input
-    input_airline = values[0] #box 1
-    input_dest = values[1]    #box 2
 
     #SAMPLE INPUT
     
@@ -157,7 +154,7 @@ def run_pred(values):
     cancellation_pred = str(prediction[1])
     cancellation_pred = cancellation_pred[2:-7]
 
-    return "Expected Delay for this flight is: " + str(delay_pred) + " Minutes", "Expected Probability of Cancellation for this flight is: " + str(cancellation_pred)
+    return delay_pred,cancellation_pred
 
 
 ##################################################################################################
@@ -172,16 +169,14 @@ def index():
     if request.method == "POST":
         airport_index = int(request.form["airport"])
         airline_index = int(request.form["airline"])
-        selected_airport = airport_list[airport_index]
-        selected_airline = airline_list[airline_index]
 
         # Make prediction based on selected values
-        delay = predict_delay(selected_airport, selected_airline)
-        cancellation = predict_cancellation(selected_airport, selected_airline)
+        delay, cancellation = run_pred(airport_index, airline_index)
 
         return render_template("index.html", airport_list=airport_list, airline_list=airline_list, delay=delay, cancellation=cancellation)
     else:
         return render_template("index.html", airport_list=airport_list, airline_list=airline_list)
-   
+
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5010, debug=True, threaded=True)
