@@ -64,7 +64,11 @@ ontime_10423 = Path(__file__) / 'ontime_10423.csv'
 #airlines_df = pd.read_csv('airlines.csv')
 #ontime_10423 = pd.read_csv('ontime_10423.csv')
 
+modely1_object = Path(__file__) / 'modely1.h5'
+
 with custom_object_scope({'rmse': rmse}):
+
+
     modely1 = keras.models.load_model(Path(__file__) / 'modely1.h5')
     modely2 = keras.models.load_model(Path(__file__) / 'modely2.h5')
 
