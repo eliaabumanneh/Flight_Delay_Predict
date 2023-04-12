@@ -75,9 +75,9 @@ def data_setup():
     ontime_10423 = pd.read_csv('ontime_10423.csv')
 
 
-    #with custom_object_scope({'rmse': rmse}):
-    modely1 = load_model('modely1.h5')
-    modely2 = load_model('modely2.h5')
+    with custom_object_scope({'rmse': rmse}):
+        modely1 = load_model('modely1.h5')
+        modely2 = load_model('modely2.h5')
 
 
     #Setting up the input matrix
