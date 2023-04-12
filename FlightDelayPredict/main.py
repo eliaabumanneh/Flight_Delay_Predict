@@ -62,15 +62,9 @@ ontime_10423 = Path(__file__) / 'ontime_10423.csv'
 
 
 with custom_object_scope({'rmse': rmse}):
-    from keras.models import load_model
+
     modely1 = load_model('modely1.h5')
-    
-load_model()
-
-
-    #modely1 = load_model(filepath=Path('./modely1.h5')) 
-    #modely2 = keras.models.load_model(Path(__file__) / 'modely2.h5')
-
+    modely2 = load_model('modely1.h5')
 
 #user input prediction function
 def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the last 
