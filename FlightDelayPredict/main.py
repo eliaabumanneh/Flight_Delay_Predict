@@ -67,7 +67,8 @@ with custom_object_scope({'rmse': rmse}):
         model = load_model('modely1.h5')
         model.load_weights('modely1.h5')
         return model
-
+    
+load_model()
 
 
     #modely1 = load_model(filepath=Path('./modely1.h5')) 
