@@ -30,6 +30,7 @@ import math
 from pathlib import Path
 import cgi
 from jinja2 import Environment, FileSystemLoader
+from time import sleep
 
 env = Environment(loader=FileSystemLoader('.'))
 template = env.get_template('webpage.html')
@@ -116,9 +117,18 @@ airport_dict = airports_df.set_index('AIRPORT_ID')['DISPLAY_AIRPORT_NAME'].to_di
 airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
 
 form = cgi.FieldStorage()
+airline_idx = None
+airport_idx = None
 
-airline_idx = int(form.getvalue('airline'))
-airport_idx = int(form.getvalue('airport'))
+while airline_idx is None or airport_idx is None:
+    airline_idx = form.getvalue('airline')
+    airport_idx = form.getvalue('airport')
+    if airline_idx is None or airport_idx is None:
+        sleep(10)
+
+airline_idx = int(airline_idx)
+airport_idx = int(airport_idx)
+
 
 def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
@@ -145,7 +155,6 @@ delay_pred = delay_pred[2:-8]
 #output to be sent to user
 cancellation_pred = str(prediction[1])
 cancellation_pred = cancellation_pred[2:-7]
-
 
 print("Expected Delay for this flight is: " + str(delay_pred) + " Minutes")
 print("Expected Probability of Cancellation for this flight is: " + str(cancellation_pred))
