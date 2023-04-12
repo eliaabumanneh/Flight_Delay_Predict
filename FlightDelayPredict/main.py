@@ -42,8 +42,9 @@ modelTraining = st.beta_container()
 
 with header: 
     st.title('Flight Delay Predict')
-
-
+    st.write('Data Science Bootcamp Capstone Project')
+    st.write('Elia Abu-Manneh')
+    st.write('April 12 2023')
 
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
