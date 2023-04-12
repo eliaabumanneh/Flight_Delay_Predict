@@ -41,7 +41,7 @@ features = st.beta_container()
 modelTraining = st.beta_container()
 
 with header: 
-        st.Title('Flight Delay Predict')
+    st.Title('Flight Delay Predict')
 
 
 
