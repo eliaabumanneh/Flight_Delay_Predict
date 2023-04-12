@@ -162,12 +162,12 @@ def run_pred(input_dest, input_airline):
 app = Flask(__name__)
 @app.route('/')
 def temp():
-    data_setup()
+    #data_setup()
     return render_template('webpage.html')
 
 @app.route('/',methods=['POST','GET'])
 def index():
-    data_setup()
+    #data_setup()
     if request.method == "POST":
         airport_index = int(request.form["airport"])
         airline_index = int(request.form["airline"])
