@@ -115,6 +115,11 @@ airport_dict = airports_df.set_index('AIRPORT_ID')['DISPLAY_AIRPORT_NAME'].to_di
 #using the map function to replace the values in airport_list
 airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
 
+form = cgi.FieldStorage()
+
+airline_idx = int(form.getvalue('airline'))
+airport_idx = int(form.getvalue('airport'))
+
 def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
     return day_of_year / 365
