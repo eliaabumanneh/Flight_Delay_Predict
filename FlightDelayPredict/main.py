@@ -36,15 +36,19 @@ import numpy as np
 
 #initialising containers
 header = st.beta_container()
-dataset = st.beta_container()
-features = st.beta_container()
-modelTraining = st.beta_container()
+input = st.beta_container()
 
 with header: 
     st.title('Flight Delay Predict')
     st.write('Data Science Bootcamp Capstone Project')
     st.write('Elia Abu-Manneh')
     st.write('April 12 2023')
+
+with input:
+    user_input_airline = sel_col.selectbox('Enter Airline', options =[], index = 9999)
+
+
+
 
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
