@@ -69,7 +69,7 @@ modely1_object = Path(__file__) / 'modely1.h5'
 with custom_object_scope({'rmse': rmse}):
 
 
-    modely1 = load_model('modely1.h5', compile=False)  
+    modely1 = load_model(Path(__file__) / 'modely1.h5', compile=False)  
     modely2 = keras.models.load_model(Path(__file__) / 'modely2.h5')
 
 
