@@ -74,12 +74,12 @@ def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the las
 
     #make delay prediction with the model
     raw_delay_prediction = modely1.predict(numpy_array_input)
-    tranformed_delay_prediction = np.exp(raw_delay_prediction) -30
+    transformed_delay_prediction = np.exp(raw_delay_prediction) -30
 
     #make cancellation prediction with the model
     cancellation_prediction = modely2.predict(numpy_array_input)
 
-    return tranformed_delay_prediction, cancellation_prediction
+    return transformed_delay_prediction, cancellation_prediction
 
 #Setting up the input matrix
 
