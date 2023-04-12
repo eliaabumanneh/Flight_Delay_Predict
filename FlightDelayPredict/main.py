@@ -116,6 +116,10 @@ airport_dict = airports_df.set_index('AIRPORT_ID')['DISPLAY_AIRPORT_NAME'].to_di
 #using the map function to replace the values in airport_list
 airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
 
+print(airport_list)
+print(type(airport_list))
+#airline_list = ['Delta Air Lines', 'American Airlines', 'United Airlines', 'Southwest Airlines']
+#airport_list = ['John F. Kennedy International Airport (JFK)', 'Los Angeles International Airport (LAX)', 'O\'Hare International Airport (ORD)', 'Dallas/Fort Worth International Airport (DFW)']
 form = cgi.FieldStorage()
 airline_idx = None
 airport_idx = None
