@@ -163,11 +163,13 @@ app = Flask(__name__)
 @app.route('/')
 def temp():
     data_setup()
+    print("this is temp")
     return render_template('webpage.html')
 
 @app.route('/',methods=['POST','GET'])
 def index():
     data_setup()
+    print("This is index")
     if request.method == "POST":
         airport_index = int(request.form["airport"])
         airline_index = int(request.form["airline"])
