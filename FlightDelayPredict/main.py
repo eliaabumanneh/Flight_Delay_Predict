@@ -125,8 +125,8 @@ def yeartodate_scaled():
 
 #SAMPLE INPUT
 input_df['val'] = 0      #Resetting input
-input_airline = 14        #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
-input_dest = 8         #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
+input_airline = 13       #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
+input_dest = 5         #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
 
 #EXECUTION
 
