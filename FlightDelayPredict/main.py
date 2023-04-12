@@ -64,6 +64,9 @@ ontime_10423 = Path(__file__) / 'ontime_10423.csv'
 modely1_object = Path(__file__) / 'modely1.h5'
 
 with custom_object_scope({'rmse': rmse}):
+
+
+    model = tf.keras.models.load_model('modely1.h5')
     modely1 = load_model(filepath=Path('./modely1.h5')) 
     modely2 = keras.models.load_model(Path(__file__) / 'modely2.h5')
 
