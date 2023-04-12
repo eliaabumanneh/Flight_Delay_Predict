@@ -59,10 +59,6 @@ import pickle
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
-app = Flask(__name__)
-@app.route('/')
-
-
 def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
     return day_of_year / 365
@@ -122,6 +118,10 @@ def data_setup():
     airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
 
 data_setup()
+
+##################################################################################################
+app = Flask(__name__)
+@app.route('/')
 
 @app.route('/',methods=['POST','GET'])
 def get_input():
