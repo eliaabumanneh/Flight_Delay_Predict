@@ -56,9 +56,9 @@ with input:
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
-airports_df = Path(__file__) / 'airports.csv'
-airlines_df = Path(__file__) / 'airlines.csv'
-ontime_10423 = Path(__file__) / 'ontime_10423.csv'
+airports_df = pd.read_csv('airports.csv')
+airlines_df = pd.read_csv('airlines.csv')
+ontime_10423 = pd.read_csv('ontime_10423.csv')
 
 
 with custom_object_scope({'rmse': rmse}):
