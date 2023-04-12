@@ -63,10 +63,6 @@ def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
     return day_of_year / 365
 
-
-def temp():
-    return render_template('template.html')
-
 def data_setup():
     airports_df = pd.read_csv('airports.csv')
     airlines_df = pd.read_csv('airlines.csv')
@@ -136,6 +132,9 @@ print()
 ##################################################################################################
 app = Flask(__name__)
 @app.route('/')
+def temp():
+    return render_template('template.html')
+
 
 @app.route('/',methods=['POST','GET'])
 def get_input():
