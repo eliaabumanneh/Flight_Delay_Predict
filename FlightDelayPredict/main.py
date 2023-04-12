@@ -2,10 +2,10 @@ import streamlit as st
 import os
 import pandas as pd
 import numpy as np
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.utils import shuffle
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
-from sklearn.model_selection import train_test_split
+#from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+#from sklearn.utils import shuffle
+#from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
+#from sklearn.model_selection import train_test_split
 import tensorflow as tf
 import keras
 from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
