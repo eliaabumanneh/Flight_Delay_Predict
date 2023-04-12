@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flight Delay Predict</title>
+    <meta charset="UTF-8">
+    <title>Flight Delay Prediction</title>
   </head>
   <body>
-    <h1>Flight Delay Predictor</h1>
-    <form action="main.py" method="post">
-      <label for="airline">Airline:</label>
-      <select id="airline" name="airline">
-        {% for i in range(len(airline_list)) %}
-          <option value="{{ i }}">{{ airline_list[i] }}</option>
-        {% endfor %}
-      </select>
-
-      <br><br>
-
+    <h1>Flight Delay Prediction</h1>
+    <form method="post">
       <label for="airport">Airport:</label>
-      <select id="airport" name="airport">
+      <select name="airport" id="airport">
         {% for i in range(len(airport_list)) %}
           <option value="{{ i }}">{{ airport_list[i] }}</option>
         {% endfor %}
       </select>
-
       <br><br>
-
-      <input type="submit" value="Predict Delay">
+      <label for="airline">Airline:</label>
+      <select name="airline" id="airline">
+        {% for i in range(len(airline_list)) %}
+          <option value="{{ i }}">{{ airline_list[i] }}</option>
+        {% endfor %}
+      </select>
+      <br><br>
+      <input type="submit" value="Predict">
     </form>
+    {% if delay is not none %}
+      <p>Delay prediction: {{ delay }}</p>
+    {% endif %}
+    {% if cancellation is not none %}
+      <p>Cancellation prediction: {{ cancellation }}</p>
+    {% endif %}
   </body>
 </html>
+
 
 
