@@ -1,7 +1,7 @@
+import streamlit as st
 import os
 import pandas as pd
 import numpy as np
-from skimage.io import imread
 from tqdm import tqdm
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.utils import shuffle
@@ -96,6 +96,21 @@ airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
 def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
     return day_of_year / 365
+
+#Streamlit Componenets
+
+#initialising containers
+header = st.beta_container()
+dataset = st.beta_container()
+features = st.beta_container()
+modelTraining = st.beta_container()
+
+with header: 
+        st.Title('Flight Delay Predict')
+
+
+
+
 
 #SAMPLE INPUT
 input_df['val'] = 0      #Resetting input
