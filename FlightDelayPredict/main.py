@@ -62,7 +62,6 @@ ontime_10423 = pd.read_csv('ontime_10423.csv')
 
 
 with custom_object_scope({'rmse': rmse}):
-
     modely1 = load_model('modely1.h5')
     modely2 = load_model('modely1.h5')
 
@@ -118,10 +117,6 @@ airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
 def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
     return day_of_year / 365
-
-
-
-
 
 #SAMPLE INPUT
 input_df['val'] = 0      #Resetting input
