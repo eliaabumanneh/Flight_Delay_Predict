@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flight Delay Predict</title>
+  </head>
+  <body>
+    <h1>Flight Delay Predictor</h1>
+    <form action="main.py" method="post">
+      <label for="airline">Airline:</label>
+      <select id="airline" name="airline">
+        {% for i in range(len(airline_list)) %}
+          <option value="{{ i }}">{{ airline_list[i] }}</option>
+        {% endfor %}
+      </select>
+
+      <br><br>
+
+      <label for="airport">Airport:</label>
+      <select id="airport" name="airport">
+        {% for i in range(len(airport_list)) %}
+          <option value="{{ i }}">{{ airport_list[i] }}</option>
+        {% endfor %}
+      </select>
+
+      <br><br>
+
+      <input type="submit" value="Predict Delay">
+    </form>
+  </body>
+</html>
+
+

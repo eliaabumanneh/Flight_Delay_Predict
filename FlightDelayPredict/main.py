@@ -28,29 +28,30 @@ from datetime import datetime
 import seaborn as sb
 import math
 from pathlib import Path
+import cgi
+from jinja2 import Environment, FileSystemLoader
 
+env = Environment(loader=FileSystemLoader('.'))
+template = env.get_template('webpage.html')
 
 #Streamlit Componenets
 
 #initialising containers
-header = st.beta_container()
-input = st.beta_container()
+#header = st.beta_container()
+#input = st.beta_container()
 
-current_dir = os.getcwd()
-with header: 
-    st.title('Flight Delay Predict')
-    st.write('Data Science Bootcamp Capstone Project')
-    st.write('Elia Abu-Manneh')
-    st.write('April 12 2023')
+#current_dir = os.getcwd()
+#with header: 
+#    st.title('Flight Delay Predict')
+#    st.write('Data Science Bootcamp Capstone Project')
+#    st.write('Elia Abu-Manneh')
+#    st.write('April 12 2023')
 
     
-    st.write(current_dir)
+#    st.write(current_dir)
 
-airline_list = ['Delta', 'United', 'American', 'Southwest']
-
-
-with input:
-    selected_index = st.selectbox('Select an airline:', airline_list)
+#with input:
+#    selected_index = st.selectbox('Select an airline:', airline_list)
 
 
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
