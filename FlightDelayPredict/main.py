@@ -57,10 +57,19 @@ with input:
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
+from pathlib import Path
 
-airports_df = pd.read_csv(r'airports/csv')
-airlines_df = pd.read_csv(r"airlines.csv")
-ontime_10423 = pd.read_csv(r"ontime_10423.csv")
+# create a Path object for the directory containing the CSV files
+csv_dir = Path('.')
+
+# read in the airports, airlines, and ontime CSV files using the Path object
+airports_df = pd.read_csv(csv_dir / 'airports.csv')
+airlines_df = pd.read_csv(csv_dir / 'airlines.csv')
+ontime_10423 = pd.read_csv(csv_dir / 'ontime_10423.csv')
+
+#airports_df = pd.read_csv('airports/csv')
+#airlines_df = pd.read_csv('airlines.csv')
+#ontime_10423 = pd.read_csv('ontime_10423.csv')
 
 with custom_object_scope({'rmse': rmse}):
     modely1 = keras.models.load_model('modely1.h5')
