@@ -85,11 +85,11 @@ def data_setup():
     X_data = ontime_10423.iloc[:,:-64]
     X_data.drop(['ORIGIN_AIRPORT_ID','DEP_DELAY','CANCELLED'], axis=1, inplace=True)
     collist = X_data.columns.tolist()
-    input_df = pd.DataFrame({'feature': collist, 'val': 0* len(collist)})
+    #input_df = pd.DataFrame({'feature': collist, 'val': 0* len(collist)})
 
-    first_row = input_df.iloc[0]
-    input_df = input_df.iloc[1:]
-    input_df = input_df.append(first_row, ignore_index=True)
+    #first_row = input_df.iloc[0]
+    #input_df = input_df.iloc[1:]
+    #input_df = input_df.append(first_row, ignore_index=True)
 
 
     #creating a list of airlines for users to pick from
@@ -118,6 +118,20 @@ def data_setup():
     airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
 
 data_setup()
+print("Data setup done")
+#user input prediction function
+def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the last 
+
+    #make delay prediction with the model
+    raw_delay_prediction = modely1.predict(numpy_array_input)
+    transformed_delay_prediction = np.exp(raw_delay_prediction) -30
+
+    #make cancellation prediction with the model
+    cancellation_prediction = modely2.predict(numpy_array_input)
+
+    return transformed_delay_prediction, cancellation_prediction
+
+print()
 
 ##################################################################################################
 app = Flask(__name__)
@@ -131,38 +145,27 @@ def get_input():
     
 @app.route('/run_pred/<values>')
 
-#user input prediction function
-def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the last 
 
-    #make delay prediction with the model
-    raw_delay_prediction = modely1.predict(numpy_array_input)
-    transformed_delay_prediction = np.exp(raw_delay_prediction) -30
-
-    #make cancellation prediction with the model
-    cancellation_prediction = modely2.predict(numpy_array_input)
-
-    return transformed_delay_prediction, cancellation_prediction
 
 def run_pred(values):
-    input_df['val'] = 0 
-    values = [int(val) for val in values.split('.')]
-    input_airline = values[0]
-    input_airline = values[1]
+    values = [int(val) for val in values.split('.')] #from Joseph Peart's code
 
-
+    new_list = [0]*len(collist) #Resetting input
+    input_airline = values[0] #box 1
+    input_dest = values[1]    #box 2
 
     #SAMPLE INPUT
-    input_df['val'] = 0      #Resetting input
-    input_airline = 9       #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
-    input_dest = 2         #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
+    
+    #input_airline = 9      #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
+    #input_dest = 2         #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
 
     #EXECUTION
 
-    input_df.iloc[input_airline,1] = 1          #Executes the addition of airline to input
-    input_df.iloc[input_dest+17,1] = 1          #Executes the addition of airport to input
-    input_df.iloc[-1,-1] = round(yeartodate_scaled(),3)  #Executes the addition of scaled YTD
+    collist[input_airline] = 1          #Executes the addition of airline to input
+    collist[input_dest+17] = 1          #Executes the addition of airport to input
+    collist[-1] = round(yeartodate_scaled(),3)  #Executes the addition of scaled YTD
 
-    X_input = np.array(input_df.iloc[:,1]).reshape(-1,43)
+    X_input = np.array(collist.reshape(-1,43))
 
     #test prediction
     prediction = user_pred(X_input)
