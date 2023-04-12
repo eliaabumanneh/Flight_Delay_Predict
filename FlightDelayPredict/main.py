@@ -35,11 +35,15 @@ import math
 header = st.beta_container()
 input = st.beta_container()
 
+current_dir = os.getcwd()
 with header: 
     st.title('Flight Delay Predict')
     st.write('Data Science Bootcamp Capstone Project')
     st.write('Elia Abu-Manneh')
     st.write('April 12 2023')
+
+    
+    st.write(current_dir)
 
 airline_list = ['Delta', 'United', 'American', 'Southwest']
 
@@ -53,10 +57,7 @@ with input:
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
-current_dir = os.getcwd()
-
-file_path1 = os.path.join(current_dir, "ontime_10423.csv")
-ontime_10423 = pd.read_csv(file_path1)
+ontime_10423 = pd.read_csv("ontime_10423.csv")
 airports_df = pd.read_csv('airports.csv')
 airlines_df = pd.read_csv('airlines.csv')
 
