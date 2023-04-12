@@ -58,9 +58,9 @@ def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
 
-airports_df = pd.read_csv(r'airports.csv')
-airlines_df = pd.read_csv(r'airlines.csv')
-ontime_10423 = pd.read_csv(r'ontime_10423.csv')
+airports_df = pd.read_csv(r"/airports.csv")
+airlines_df = pd.read_csv(r"airlines.csv")
+ontime_10423 = pd.read_csv(r"ontime_10423.csv")
 
 with custom_object_scope({'rmse': rmse}):
     modely1 = keras.models.load_model('modely1.h5')
