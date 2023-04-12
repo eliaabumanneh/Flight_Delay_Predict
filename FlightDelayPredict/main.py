@@ -31,9 +31,12 @@ from pathlib import Path
 import cgi
 from jinja2 import Environment, FileSystemLoader
 from time import sleep
+from flask import Flask, render_template, request, redirect, url_for
+import pickle
 
-env = Environment(loader=FileSystemLoader('.'))
-template = env.get_template('webpage.html')
+#html code
+#env = Environment(loader=FileSystemLoader('.'))
+#template = env.get_template('webpage.html')
 
 #Streamlit Componenets
 
@@ -48,7 +51,6 @@ template = env.get_template('webpage.html')
 #    st.write('Elia Abu-Manneh')
 #    st.write('April 12 2023')
 
-    
 #    st.write(current_dir)
 
 #with input:
@@ -115,27 +117,6 @@ airport_dict = airports_df.set_index('AIRPORT_ID')['DISPLAY_AIRPORT_NAME'].to_di
 
 #using the map function to replace the values in airport_list
 airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
-
-template_vars = {
-    'airline_list': airline_list,
-    'airport_list': airport_list
-}
-
-output = template.render(template_vars)
-#airline_list = ['Delta Air Lines', 'American Airlines', 'United Airlines', 'Southwest Airlines']
-#airport_list = ['John F. Kennedy International Airport (JFK)', 'Los Angeles International Airport (LAX)', 'O\'Hare International Airport (ORD)', 'Dallas/Fort Worth International Airport (DFW)']
-form = cgi.FieldStorage()
-airline_idx = None
-airport_idx = None
-
-while airline_idx is None or airport_idx is None:
-    airline_idx = form.getvalue('airline')
-    airport_idx = form.getvalue('airport')
-    if airline_idx is None or airport_idx is None:
-        sleep(10)
-
-airline_idx = int(airline_idx)
-airport_idx = int(airport_idx)
 
 
 def yeartodate_scaled():
