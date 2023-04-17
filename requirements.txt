@@ -9,3 +9,4 @@ xgboost
 statsmodels
 seaborn
 pillow
+gunicorn
