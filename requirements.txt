@@ -1,4 +1,4 @@
-streamlit
+pip install -U 'protobuf=3.19.0'
 pandas
 numpy
 scikit-learn
