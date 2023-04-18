@@ -12,7 +12,6 @@ from keras.models import Sequential
 from keras.callbacks import Callback, ReduceLROnPlateau, EarlyStopping
 from tensorflow.keras.losses import SparseCategoricalCrossentropy, CategoricalCrossentropy
 from tensorflow.keras import datasets, layers, models
-#from IPython.display import clear_output
 import matplotlib.pyplot as plt
 import tensorflow.keras.backend as K
 import keras.backend as K
@@ -32,7 +31,7 @@ from time import sleep
 from flask import Flask, render_template, request
 from pathlib import Path
 
-#init flask app
+#Initialises the flask app
 app = Flask(__name__)
 
 #Helper functions
@@ -91,7 +90,7 @@ def data_setup(): #CSV and H5 file imports and
 
     return airport_list, airline_list, collist
 
-#user input prediction function
+#Sser input prediction function
 def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the last 
 
     #make delay prediction with the model
@@ -105,6 +104,7 @@ def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the las
 
     return transformed_delay_prediction, cancellation_prediction
 
+#Main Prediction Function
 def run_pred(input_dest, input_airline):
 
     global new_list
@@ -118,22 +118,22 @@ def run_pred(input_dest, input_airline):
 
     #test prediction
     prediction = user_pred(X_input)
-    delay_pred = str(prediction[0])
-    delay_pred = delay_pred[2:-8]
+    delay_pred_array = (prediction[0])
+    delay_pred = round(float(delay_pred_array[0]),2)
 
     #output to be sent to user
-    cancellation_pred = str(prediction[1])
-    cancellation_pred = cancellation_pred[2:-7]
+    cancellation_pred_array = (prediction[1])
+    cancellation_pred = round(float(cancellation_pred_array[0]),3)
 
     return delay_pred,cancellation_pred
 
-loaded = 0
+loaded = 0 #Initial variable - 0 means data_setup() has not occured yet
 
 #Flask components
 @app.route('/') #routes to html page at ('/')
 def index():
     global airport_list, airline_list, collist, loaded
-    if loaded ==0: 
+    if loaded ==0: #if data not loaded (0), loading occurs. This prevents repeat data_setup every time the ('/') page is visited.
         airport_list, airline_list, collist = data_setup()
         loaded = 1
     
@@ -141,20 +141,17 @@ def index():
 
 @app.route('/predict', methods=['GET','POST'], )
 def predict(): # Make prediction based on selected values
-    
+    #Feature user input    
     int_features = [int(x) for x in request.form.values()]
-    
     airport_index = int_features[0] 
     airline_index = int_features[1]
 
-    #airport_index = int(index chosen from airport_list)
-    #airline_index = int(index chosen from airline_list)
-
+    #Prediction Model running
     delay, cancellation = run_pred(airport_index, airline_index)
 
-    return render_template('webpage.html', prediction_text='Expected flight delay time is {}'.format(round(str(delay),1)) + ' minutes', cancellation_text='The likelihood of cancellation is {}'.format(abs(cancellation)), airport_list=airport_list, airline_list = airline_list)
+    return render_template('webpage.html', prediction_text='Expected flight delay time is {}'.format(delay) + ' minutes', cancellation_text='The likelihood of cancellation is {}'.format(cancellation), airport_list=airport_list, airline_list=airline_list)
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     port = int(os.environ.get('PORT',5000))
     app.run(host='0.0.0.0', port=port)
     
