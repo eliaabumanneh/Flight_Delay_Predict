@@ -154,10 +154,10 @@ def predict(): # Make prediction based on selected values
     #airline_index = int(index chosen from airline_list)
 
     delay, cancellation = run_pred(airport_index, airline_index)
-    print("Your delay is " + str(delay))
-    print("Your cancellation time is " + str(cancellation))
+    #print("Your delay is " + str(delay))
+    #print("Your cancellation time is " + str(cancellation))
 
-    return render_template('template.html', prediction_text='"Your delay is " + str(delay)')
+    return render_template('template.html', prediction_text='Your delay is {}'.format(delay))
 
 
 
