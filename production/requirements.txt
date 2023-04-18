@@ -5,9 +5,6 @@ scikit-learn
 tensorflow
 keras
 matplotlib
-xgboost
-statsmodels
-seaborn
 pillow
 gunicorn
 flask
