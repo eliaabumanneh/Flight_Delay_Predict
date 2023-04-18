@@ -61,12 +61,6 @@ def data_setup(): #CSV and H5 file imports and
     X_data = ontime_10423.iloc[:,:-64]
     X_data.drop(['ORIGIN_AIRPORT_ID','DEP_DELAY','CANCELLED'], axis=1, inplace=True)
     collist = X_data.columns.tolist()
-    #input_df = pd.DataFrame({'feature': collist, 'val': 0* len(collist)})
-
-    #first_row = input_df.iloc[0]
-    #input_df = input_df.iloc[1:]
-    #input_df = input_df.append(first_row, ignore_index=True)
-
 
     #creating a list of airlines for users to pick from
     airline_list = []
