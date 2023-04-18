@@ -133,7 +133,9 @@ def index():
     global airport_list, airline_list, collist, loaded
     if loaded ==0: 
         airport_list, airline_list, collist = data_setup()
-        return render_template('webpage.html', airport_list=airport_list, airline_list = airline_list)
+        loaded = 1
+    
+    return render_template('webpage.html', airport_list=airport_list, airline_list = airline_list)
 
 @app.route('/predict', methods=['GET','POST'], )
 def predict(): # Make prediction based on selected values
