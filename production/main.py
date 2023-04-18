@@ -31,6 +31,14 @@ import cgi
 from time import sleep
 from flask import Flask, render_template, request
 
+#init flask app
+app = Flask(__name__)
+
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT',5000))
+    app.run(host='0.0.0.0', port=port)
+    
 
 
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
