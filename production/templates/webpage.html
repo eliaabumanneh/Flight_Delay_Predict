@@ -1,18 +1,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flight Delay Predict airport_list</title>
+  <title>Flight Delay Predict - Austin, TX</title>
 </head>
 
 <body style="background: #000">
   <div class="login">
-    <h1 style="color:rgb(218, 238, 130)">Flight Delay Prediction</h1>
+    <h1 style="color:rgb(218, 238, 130)">Flight Delay Predict - Austin International Airport</h1>
 
     <!-- Action where the data is being sent-->
     <form action="{{ url_for('predict')}}" method="post">
       
       <!-- Airport dropdown -->
-      <label for="airport">Select an airport:</label>
+      <label for="airport">Select Destination Airport:</label>
       <select name="airport" id="airport">
         {% for airport in airport_list %}
           <option value="{{ loop.index0 }}">{{ airport }}</option>
@@ -20,7 +20,7 @@
       </select><br>
 
       <!-- Airline dropdown -->
-      <label for="airline">Select an airline:</label>
+      <label for="airline">Select Airline:</label>
       <select name="airline" id="airline">
         {% for airline in airline_list %}
           <option value="{{ loop.index0 }}">{{ airline }}</option>
