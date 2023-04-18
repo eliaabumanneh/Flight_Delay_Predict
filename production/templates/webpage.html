@@ -1,35 +1,43 @@
-<!doctype html>
-<html>
-  <head>
-    <title>My Predictor</title>
-  </head>
-  <body>
-    <h1>My Predictor</h1>
-    <form method="POST" action="/">
-      <label for="airport">Airport:</label>
-      <select id="airport" name="airport">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Delay Predict airport_list</title>
+</head>
+
+<body style="background: #000">
+  <div class="login">
+    <h1 style="color:rgb(218, 238, 130)">Flight Delay Prediction</h1>
+
+    <!-- Action where the data is being sent-->
+    <form action="{{ url_for('predict')}}" method="post">
+      
+      <!-- Airport dropdown -->
+      <label for="airport">Select an airport:</label>
+      <select name="airport" id="airport">
         {% for airport in airport_list %}
-        <option value="{{loop.index0}}">{{airport}}</option>
+          <option value="{{ loop.index0 }}">{{ airport }}</option>
         {% endfor %}
-      </select>
+      </select><br>
 
-      <label for="airline">Airline:</label>
-      <select id="airline" name="airline">
+      <!-- Airline dropdown -->
+      <label for="airline">Select an airline:</label>
+      <select name="airline" id="airline">
         {% for airline in airline_list %}
-        <option value="{{loop.index0}}">{{airline}}</option>
+          <option value="{{ loop.index0 }}">{{ airline }}</option>
         {% endfor %}
-      </select>
+      </select><br>
 
-      <button type="submit" name="submit">Predict</button>
+      <button type="submit" class="btn btn-primary btn-block btn-large">Predict Flight Delay</button></p>
     </form>
 
-    {% if request.method == "POST" %}
-      <h2>Selected:</h2>
-      <p>Airport index: {{airport_index}}</p>
-      <p>Airline index: {{airline_index}}</p>
-    {% endif %}
-  </body>
-</html>
+    <br>
+    <br>
+    <h4 style="color:Violet;">
+      {{ prediction_text }}</h4>
+    <h4 style="color:Violet;">
+      {{ cancellation_text }}</h4>
+  </div>
+</body>
 
 
 

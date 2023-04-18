@@ -59,6 +59,8 @@ def data_setup(): #CSV and H5 file imports and
     X_data.drop(['ORIGIN_AIRPORT_ID','DEP_DELAY','CANCELLED'], axis=1, inplace=True)
     collist = X_data.columns.tolist()
 
+    global airline_list, airport_list
+
     #creating a list of airlines for users to pick from
     airline_list = []
     for col in collist:
@@ -68,6 +70,7 @@ def data_setup(): #CSV and H5 file imports and
     #creating a dictionary to map OP_UNIQUE_CARRIER to CARRIER_NAME
     carrier_dict = airlines_df.set_index('OP_UNIQUE_CARRIER')['CARRIER_NAME'].to_dict()
 
+    
     #using the map function to replace the values in airline_list
     airline_list = [carrier_dict.get(airline, airline) for airline in airline_list]
 
@@ -83,9 +86,6 @@ def data_setup(): #CSV and H5 file imports and
 
     #using the map function to replace the values in airport_list
     airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
-
-    print(airport_list)
-    print(airline_list)
 
     return airport_list, airline_list, collist
 
@@ -125,17 +125,18 @@ def run_pred(input_dest, input_airline):
 
     return delay_pred,cancellation_pred
 
-airport_list, airline_list, collist = data_setup()
+
 
 #Flask components
 @app.route('/') #routes to html page at ('/')
 def index():
-    return render_template('template.html')
+    global airport_list, airline_list, collist
+    airport_list, airline_list, collist = data_setup()
+    return render_template('webpage.html', airport_list=airport_list, airline_list = airline_list)
 
-@app.route('/predict', methods=['GET','POST'])
-
-
+@app.route('/predict', methods=['GET','POST'], )
 def predict(): # Make prediction based on selected values
+    
     int_features = [int(x) for x in request.form.values()]
     
     airport_index = int_features[0] 
@@ -146,7 +147,7 @@ def predict(): # Make prediction based on selected values
 
     delay, cancellation = run_pred(airport_index, airline_index)
 
-    return render_template('template.html', prediction_text='Your delay is {}'.format(delay), cancellation_text='The likelihood of cancellation is {}'.format(cancellation))
+    return render_template('webpage.html', prediction_text='Your delay is {}'.format(delay), cancellation_text='The likelihood of cancellation is {}'.format(cancellation), airport_list=airport_list, airline_list = airline_list)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT',5000))
