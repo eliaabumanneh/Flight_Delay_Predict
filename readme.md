@@ -7,10 +7,10 @@
 User inputs their origin airport, destination and airline. The tool predicts the expected flight delay and likelihood of cancellation.
 
 
-# Project Description: 
+# Project Description
 A tool that allows users to get a prediction on the likelihood of their flight being delay or cancelled using historical data and forecasted data. 
 
-# Project Limitations:
+# Project Limitations
 * Data Limitation: The data used in this tool is limited to the contingous United States and limited to the airport data provided by the Buereau of Transportation Statistics. 
 
 * Modelling Limitation: Due to the large size of the data, the models have been subdivided by originairport to reduces modelling complexity by 2 orders of Magnitude. 
