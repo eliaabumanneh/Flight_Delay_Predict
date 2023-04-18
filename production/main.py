@@ -34,13 +34,7 @@ from flask import Flask, render_template, request
 #init flask app
 app = Flask(__name__)
 
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT',5000))
-    app.run(host='0.0.0.0', port=port)
-    
-
-
+#Helper functions
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
 
@@ -140,17 +134,36 @@ def run_pred(input_dest, input_airline):
 
     return delay_pred,cancellation_pred
 
+global airport_list, airline_list, collist
 airport_list, airline_list, collist = data_setup()
 
-airport_index = 2
-airline_index = 3
+#Flask components
+@app.route('/') #routes to html page at ('/')
+def index():
+    return render_template('template.html')
 
-#airport_index = int(index chosen from airport_list)
-#airline_index = int(index chosen from airline_list)
+@app.route('/predict', methods=['GET','POST'])
 
-# Make prediction based on selected values
-delay, cancellation = run_pred(airport_index, airline_index)
 
-print("Your delay is " + str(delay))
-print("Your cancellation time is " + str(cancellation))
+def predict(): # Make prediction based on selected values
+    airport_index = 2 # request.get_data()
+    airline_index = 3
+
+    #airport_index = int(index chosen from airport_list)
+    #airline_index = int(index chosen from airline_list)
+
+    delay, cancellation = run_pred(airport_index, airline_index)
+    print("Your delay is " + str(delay))
+    print("Your cancellation time is " + str(cancellation))
+
+
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT',5000))
+    app.run(host='0.0.0.0', port=port)
+    
+
+
+
+
 
