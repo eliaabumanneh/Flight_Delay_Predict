@@ -43,16 +43,17 @@ def yeartodate_scaled():
     return day_of_year / 365
 
 def data_setup(): #CSV and H5 file imports and
-    airports_df = pd.read_csv('airports.csv')
-    airlines_df = pd.read_csv('airlines.csv')
-    ontime_10423 = pd.read_csv('ontime_10423.csv')
+    airports_df = pd.read_csv(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\airports.csv')
+    airlines_df = pd.read_csv(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\airlines.csv')
+    ontime_10423 = pd.read_csv(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\ontime_10423.csv')
 
 
     with custom_object_scope({'rmse': rmse}):
+        global modely1, modely2
         print("About to load y1")
-        modely1 = load_model('modely1.h5')
+        modely1 = load_model(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\modely1.h5')
         print("Load done y1")
-        modely2 = load_model('modely2.h5')
+        modely2 = load_model(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\modely2.h5')
 
 
     #Setting up the input matrix
@@ -98,7 +99,9 @@ def data_setup(): #CSV and H5 file imports and
 def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the last 
 
     #make delay prediction with the model
+     #Unit testing the input
     raw_delay_prediction = modely1.predict(numpy_array_input)
+
     transformed_delay_prediction = np.exp(raw_delay_prediction) -30
 
     #make cancellation prediction with the model
@@ -108,20 +111,14 @@ def user_pred(numpy_array_input):  #input is shape (43,), all OHE except the las
 
 def run_pred(input_dest, input_airline):
 
+    global new_list
     new_list = [0]*len(collist) #Resetting input
-
-    #SAMPLE INPUT
     
-    #input_airline = 9      #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
-    #input_dest = 2         #Remember, this starts at 0  #drop down menu appears as user starts typing, index is stored
+    new_list[input_airline] = 1          #Executes the addition of airline to input
+    new_list[input_dest+17] = 1          #Executes the addition of airport to input
+    new_list[-1] = round(yeartodate_scaled(),3)  #Executes the addition of scaled YTD
 
-    #EXECUTION
-
-    collist[input_airline] = 1          #Executes the addition of airline to input
-    collist[input_dest+17] = 1          #Executes the addition of airport to input
-    collist[-1] = round(yeartodate_scaled(),3)  #Executes the addition of scaled YTD
-
-    X_input = np.array(collist.reshape(-1,43))
+    X_input = np.array(new_list).reshape(-1,43)
 
     #test prediction
     prediction = user_pred(X_input)
