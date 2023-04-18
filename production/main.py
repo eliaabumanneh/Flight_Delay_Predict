@@ -134,7 +134,6 @@ def run_pred(input_dest, input_airline):
 
     return delay_pred,cancellation_pred
 
-global airport_list, airline_list, collist
 airport_list, airline_list, collist = data_setup()
 
 #Flask components
@@ -146,8 +145,10 @@ def index():
 
 
 def predict(): # Make prediction based on selected values
-    airport_index = 2 # request.get_data()
-    airline_index = 3
+    int_features = [float(x) for x in request.form.values()]
+    
+    airport_index = int_features[0] 
+    airline_index = int_features[1]
 
     #airport_index = int(index chosen from airport_list)
     #airline_index = int(index chosen from airline_list)
@@ -155,6 +156,8 @@ def predict(): # Make prediction based on selected values
     delay, cancellation = run_pred(airport_index, airline_index)
     print("Your delay is " + str(delay))
     print("Your cancellation time is " + str(cancellation))
+
+    return render_template('template.html', prediction_text='"Your delay is " + str(delay)')
 
 
 
