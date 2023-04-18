@@ -1,12 +1,9 @@
 import os
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
 import tensorflow as tf
 import keras
 from keras.models import Sequential
-import tensorflow.keras.backend as K
-import keras.backend as K
 from keras.models import load_model
 from keras.utils import custom_object_scope
 np.random.seed(0)
@@ -112,7 +109,7 @@ def run_pred(input_dest, input_airline):
 
     return delay_pred,cancellation_pred
 
-loaded = 0 #Initial variable - 0 means data_setup() has not occured yet
+loaded = 0 #Initial variable - 0 means data_setup() has not occurred yet
 
 #Flask components
 @app.route('/') #routes to html page at ('/')
