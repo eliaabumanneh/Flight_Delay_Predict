@@ -30,6 +30,7 @@ from pathlib import Path
 import cgi
 from time import sleep
 from flask import Flask, render_template, request
+from pathlib import Path
 
 #init flask app
 app = Flask(__name__)
@@ -43,16 +44,18 @@ def yeartodate_scaled():
     return day_of_year / 365
 
 def data_setup(): #CSV and H5 file imports and
-    airports_df = pd.read_csv(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\airports.csv')
-    airlines_df = pd.read_csv(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\airlines.csv')
-    ontime_10423 = pd.read_csv(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\ontime_10423.csv')
+    #creating the base_path for future relative paths
+    base_path = Path(__file__).parent
+
+    airports_df = pd.read_csv((base_path / "airports.csv").resolve())
+    airlines_df = pd.read_csv((base_path / "airlines.csv").resolve())
+    ontime_10423 = pd.read_csv((base_path / "ontime_10423.csv").resolve())
 
 
-    with custom_object_scope({'rmse': rmse}):
+    with custom_object_scope({'rmse': rmse}): #adding our rmse helper function
         global modely1, modely2
-        modely1 = load_model(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\modely1.h5')
-        modely2 = load_model(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\modely2.h5')
-
+        modely1 = load_model((base_path / "modely1.h5").resolve())
+        modely2 = load_model((base_path / "modely2.h5").resolve())
 
     #Setting up the input matrix
     X_data = ontime_10423.iloc[:,:-64]
@@ -69,7 +72,6 @@ def data_setup(): #CSV and H5 file imports and
 
     #creating a dictionary to map OP_UNIQUE_CARRIER to CARRIER_NAME
     carrier_dict = airlines_df.set_index('OP_UNIQUE_CARRIER')['CARRIER_NAME'].to_dict()
-
     
     #using the map function to replace the values in airline_list
     airline_list = [carrier_dict.get(airline, airline) for airline in airline_list]
