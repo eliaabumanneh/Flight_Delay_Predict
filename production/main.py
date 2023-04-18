@@ -155,7 +155,7 @@ def predict(): # Make prediction based on selected values
 
     delay, cancellation = run_pred(airport_index, airline_index)
 
-    return render_template('template.html', prediction_text='Your delay is {}'.format(delay), prediction_text='The likelihood of cancellation is {}'.format(cancellation))
+    return render_template('template.html', prediction_text='Your delay is {}'.format(delay), cancellation_text='The likelihood of cancellation is {}'.format(cancellation))
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT',5000))
