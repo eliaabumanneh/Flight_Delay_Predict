@@ -1,0 +1,13 @@
+weather_2019 Documentation:
+	NAME: 			Location of reading, typically airport name
+    AWND: 			Max wind speed for day
+	PRCP: 			Inches of precipitation for day
+	SNOW: 			Inches of snowfall for day
+	SNWD: 			Inches of snow on ground for day
+    TAVG:           Average temperature for day
+	TMAX: 			Max temperature for day
+    TMIN:           Min temperature for day
+    WDF2:           Direction of fastest 2-minute wind (degrees)
+    WDF5:           Direction of fastest 5-second wind (degrees)
+    WSF2:           Fastest 2-minute wind speed (miles per hour or meters per second as per user preference)
+    WSF5:           Fastest 5-second wind speed (miles per hour or meters per second as per user preference)

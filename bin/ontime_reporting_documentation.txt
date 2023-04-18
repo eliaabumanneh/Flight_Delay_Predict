@@ -1,0 +1,17 @@
+ONTIME_REPORTING_XX
+	MONTH: 			    Month
+	DAY_OF_MONTH: 		Day of the month (1-31)
+	DAY_OF_WEEK: 		Day of the week
+	OP_UNIQUE_CARRIER: 	Carrier code, matches to OP_UNIQUE_CARRIER in other files
+	OP_CARRIER_FL_NUM: 	Flight number
+	ORIGIN_AIRPORT_ID: 	Airport ID, matches to ORIGIN_AIRPORT_ID in other files
+	ORIGIN: 		Origin airport abbreviation
+	ORIGIN_CITY_NAME: 	Origin city name
+	DEST_AIRPORT_ID: 	Destination airport ID, matches Airport ID in other files
+	DEP_DELAY: 		Departure delay in minutes
+	CANCELLATION_CODE:	Cancellation Code
+	CARRIER_DELAY:		Flag for a carrier delay
+	WEATHER_DELAY:		Flag for a weather delay
+	NAS_DELAY:		Flag for a NAS delay
+	SECURITY_DELAY:		Flag for a security delay
+	LATE_AIRCRAFT_DELAY:	Flag for a late aircraft delay
