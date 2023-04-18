@@ -29,7 +29,8 @@ import math
 from pathlib import Path
 import cgi
 from time import sleep
-from flask import flask
+from flask import Flask, render_template, request
+
 
 
 def rmse(y_true, y_pred): #defining the Root Mean Squared Error function
@@ -39,7 +40,7 @@ def yeartodate_scaled():
     day_of_year = datetime.now().timetuple().tm_yday
     return day_of_year / 365
 
-def data_setup():
+def data_setup(): #CSV and H5 file imports and
     airports_df = pd.read_csv('airports.csv')
     airlines_df = pd.read_csv('airlines.csv')
     ontime_10423 = pd.read_csv('ontime_10423.csv')
