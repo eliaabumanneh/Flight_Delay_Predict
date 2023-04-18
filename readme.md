@@ -1,6 +1,6 @@
 # Flight Delay Predict
 
-#### Data Science Bootcamp Capstone Project
+#### Data Science Capstone Project
 
 # TLDR;
 
