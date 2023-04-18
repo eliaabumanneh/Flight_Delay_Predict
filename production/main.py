@@ -1,30 +1,17 @@
 import os
 import pandas as pd
 import numpy as np
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.utils import shuffle
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 import keras
-#from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
 from keras.models import Sequential
-#from keras.callbacks import Callback, ReduceLROnPlateau, EarlyStopping
-import matplotlib.pyplot as plt
 import tensorflow.keras.backend as K
 import keras.backend as K
 from keras.models import load_model
 from keras.utils import custom_object_scope
-import statsmodels.api as sm
-from sklearn.metrics import r2_score
-from sklearn.metrics import mean_squared_error, mean_absolute_error
 np.random.seed(0)
-import seaborn as sns
 from datetime import datetime
-import seaborn as sb
-import math
 from pathlib import Path
-import cgi
 from time import sleep
 from flask import Flask, render_template, request
 from pathlib import Path
