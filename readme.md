@@ -23,7 +23,6 @@ A tool that allows users to get a prediction on the likelihood of their flight b
 
 #### Languages Used:
 * Python
-* SQL
 
 #### Softwares Used:
 * Visual Code Studio
@@ -36,8 +35,6 @@ A tool that allows users to get a prediction on the likelihood of their flight b
 #### Packages Used:
 * Pandas
 * Numpy
-* SQlite
-
 
 #### Legal: 
 
