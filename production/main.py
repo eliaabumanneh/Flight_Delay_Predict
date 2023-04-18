@@ -50,14 +50,11 @@ def data_setup(): #CSV and H5 file imports and
 
     with custom_object_scope({'rmse': rmse}):
         global modely1, modely2
-        print("About to load y1")
         modely1 = load_model(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\modely1.h5')
-        print("Load done y1")
         modely2 = load_model(r'C:\Users\loolz\OneDrive\Documents\GitHub\Portfolio_A\production\modely2.h5')
 
 
     #Setting up the input matrix
-
     X_data = ontime_10423.iloc[:,:-64]
     X_data.drop(['ORIGIN_AIRPORT_ID','DEP_DELAY','CANCELLED'], axis=1, inplace=True)
     collist = X_data.columns.tolist()
@@ -86,7 +83,10 @@ def data_setup(): #CSV and H5 file imports and
 
     #using the map function to replace the values in airport_list
     airport_list = [airport_dict.get(airport, airport) for airport in airport_list]
-    print("Data loading is done!")
+
+    print(airport_list)
+    print(airline_list)
+
     return airport_list, airline_list, collist
 
 #user input prediction function
