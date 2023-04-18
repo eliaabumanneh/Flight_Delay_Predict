@@ -21,18 +21,18 @@ A tool that allows users to get a prediction on the likelihood of their flight b
 
 * [NOAA National Centers for Environmental Information - Global Historical Climatology Network daily (GHCNd) ](https://noaa-ghcn-pds.s3.amazonaws.com/index.html#csv/by_year/)
 
-# Languages Used:
+# Languages Used
 * Python
 * HTML
 
-# Softwares Used:
+# Softwares Used
 * Visual Code Studio
 * Google Chrome
 * GitHub Desktop
 * GitHub
 * CUDNN
 
-# Python Packages Used:
+# Python Packages Used
 * Pandas
 * Numpy
 * Scikit-learn
@@ -42,6 +42,6 @@ A tool that allows users to get a prediction on the likelihood of their flight b
 * Xgboost
 * Statsmodels
 
-# Legal: 
+# Legal
 
 This project was created and is intended for educational purposes only. The creator(s) nor any user(s) nor distributor(s) claim legal responsibility for any information, data, claim or prediction infered or supplied by this program whether implicitly or explicitly. The program is not to be sold or resold. The information provided by the program is not to be sold or resold. The project may be used by others for educational and non-commerical purposes. 
