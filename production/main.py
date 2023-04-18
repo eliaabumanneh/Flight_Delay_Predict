@@ -7,11 +7,9 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 import keras
-from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
+#from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
 from keras.models import Sequential
-from keras.callbacks import Callback, ReduceLROnPlateau, EarlyStopping
-from tensorflow.keras.losses import SparseCategoricalCrossentropy, CategoricalCrossentropy
-from tensorflow.keras import datasets, layers, models
+#from keras.callbacks import Callback, ReduceLROnPlateau, EarlyStopping
 import matplotlib.pyplot as plt
 import tensorflow.keras.backend as K
 import keras.backend as K
