@@ -145,7 +145,7 @@ def index():
 
 
 def predict(): # Make prediction based on selected values
-    int_features = [float(x) for x in request.form.values()]
+    int_features = [int(x) for x in request.form.values()]
     
     airport_index = int_features[0] 
     airline_index = int_features[1]
@@ -158,8 +158,6 @@ def predict(): # Make prediction based on selected values
     #print("Your cancellation time is " + str(cancellation))
 
     return render_template('template.html', prediction_text='Your delay is {}'.format(delay))
-
-
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT',5000))
