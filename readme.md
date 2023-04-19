@@ -54,7 +54,7 @@ A [Flask app](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/pr
 * Google Chrome
 * GitHub Desktop
 * GitHub
-* CUDNN
+* cuDNN
 
 # Python Packages Used
 * Pandas
