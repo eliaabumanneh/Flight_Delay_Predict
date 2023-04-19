@@ -1,12 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flight Delay Predict - Austin, TX</title>
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 0;
+      color: #333;
+      text-align: center;
+    }
+    
+    form {
+      margin-top: 30px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+    }
+    
+    button {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+    }
+    
+    h4 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 
-<body style="background: #000">
-  <div class="login">
-    <h1 style="color:rgb(218, 238, 130)">Flight Delay Predict - Austin International Airport</h1>
+<body>
+  <div class="container">
+    <h1>Flight Delay Predict</h1>
+    <h1>Austin International Airport</h1>
 
     <!-- Action where the data is being sent-->
     <form action="{{ url_for('predict')}}" method="post">
@@ -17,7 +86,7 @@
         {% for airport in airport_list %}
           <option value="{{ loop.index0 }}">{{ airport }}</option>
         {% endfor %}
-      </select><br>
+      </select>
 
       <!-- Airline dropdown -->
       <label for="airline">Select Airline:</label>
@@ -25,21 +94,18 @@
         {% for airline in airline_list %}
           <option value="{{ loop.index0 }}">{{ airline }}</option>
         {% endfor %}
-      </select><br>
+      </select>
 
-      <button type="submit" class="btn btn-primary btn-block btn-large">Predict Flight Delay</button></p>
+      <button type="submit">Predict Flight Delay</button>
     </form>
 
-    <br>
-    <br>
-    <h4 style="color:Violet;">
-      {{  user_prompt }}</h4>
-    <h4 style="color:Violet;">
-      {{ prediction_text }}</h4>
-    <h4 style="color:Violet;">
-      {{ cancellation_text }}</h4>
+    <h4 style="color: white;">{{ user_prompt }}</h4>
+    <h4 style="color: white">{{ prediction_text }}</h4>
+    <h4 style="color: white;">{{ cancellation_text }}</h4>
   </div>
 </body>
+</html>
+
 
 
 
