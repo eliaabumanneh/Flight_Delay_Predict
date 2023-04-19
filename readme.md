@@ -7,7 +7,7 @@
 User inputs their origin airport, destination and airline. The tool predicts the expected flight delay and likelihood of cancellation.
 
 # Project Walkthrough
-A tool that allows users to get a prediction on the expected delay of their flight and the liklihood of cancellation using historical data. 
+A tool that allows users to get a prediction on the expected delay of their flight and the likelihood of cancellation using historical data. 
 
 In [Part 1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_1_Data_Processing.ipynb) Data Exploration and Organisation, historical data was collected, explored and compiled. Pre-processing of the data consisted of removing rows and columns with significant levels of Nan and 0 values. Feature engineering was carried out by removing features that are not releveant to our model, as well as creating dummy variables to features such as airline name. 
 
