@@ -105,7 +105,7 @@ def run_pred(input_dest, input_airline):
 
     #output to be sent to user
     cancellation_pred_array = (prediction[1])
-    cancellation_pred = round(float(cancellation_pred_array[0]),3)
+    cancellation_pred = abs(round(float(cancellation_pred_array[0]),3))
 
     return delay_pred,cancellation_pred
 
