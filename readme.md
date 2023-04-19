@@ -6,8 +6,7 @@
 
 User inputs their origin airport, destination and airline. The tool predicts the expected flight delay and likelihood of cancellation.
 
-
-# Project Description
+# Project Summary
 A tool that allows users to get a prediction on the expected delay of their flight and the liklihood of cancellation using historical data. 
 
 In [Part 1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_1_Data_Processing.ipynb), Data was collected and pre-processed.
@@ -50,6 +49,13 @@ In [Part 3](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/
 * Matplotlib
 * Xgboost
 * Statsmodels
+
+# Project Walkthrough
+
+
+
+
+
 
 # Legal
 
