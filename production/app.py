@@ -104,8 +104,8 @@ def run_pred(input_dest, input_airline):
     delay_pred = round(float(delay_pred_array[0]),2)
 
     #output to be sent to user
-    cancellation_pred_array = (prediction[1])
-    cancellation_pred = abs(round(float(cancellation_pred_array[0]),3))
+    cancellation_pred_array = (prediction[1])*100
+    cancellation_pred = abs(round(float(cancellation_pred_array[0]),2))
 
     return delay_pred,cancellation_pred
 
@@ -114,12 +114,14 @@ loaded = 0 #Initial variable - 0 means data_setup() has not occurred yet
 #Flask components
 @app.route('/') #routes to html page at ('/')
 def index():
-    global airport_list, airline_list, collist, loaded
+    global airport_list, airline_list, collist, loaded, airport_default_index, airline_default_index
     if loaded ==0: #if data not loaded (0), loading occurs. This prevents repeat data_setup every time the ('/') page is visited.
         airport_list, airline_list, collist = data_setup()
+        airport_default_index = 0
+        airline_default_index = 0
         loaded = 1
     
-    return render_template('webpage.html', airport_list=airport_list, airline_list = airline_list)
+    return render_template('webpage.html', airport_list=airport_list, airline_list = airline_list, airport_default_index=airport_default_index, airline_default_index=airline_default_index )
 
 @app.route('/predict', methods=['GET','POST'], )
 def predict(): # Make prediction based on selected values
@@ -128,10 +130,15 @@ def predict(): # Make prediction based on selected values
     airport_index = int_features[0] 
     airline_index = int_features[1]
 
+    #Setting the dropdown boxes to freeze the choice
+    global airport_default_index, airline_default_index
+    airport_default_index = airport_index
+    airline_default_index = airline_index
+
     #Prediction Model running
     delay, cancellation = run_pred(airport_index, airline_index)
 
-    return render_template('webpage.html',user_prompt='A flight to {}'.format(airport_list[airport_index]) + ' on {}'.format(airline_list[airline_index]), prediction_text='Expected flight delay time is {}'.format(delay) + ' minutes', cancellation_text='The likelihood of cancellation is {}'.format(cancellation), airport_list=airport_list, airline_list=airline_list)
+    return render_template('webpage.html',user_prompt='For a flight to {}'.format(airport_list[airport_index]) + ' on {}'.format(airline_list[airline_index]), prediction_text='Expected flight delay time is {}'.format(delay) + ' minutes', cancellation_text='The likelihood of cancellation is {}'.format(cancellation) + '%', airport_list=airport_list, airline_list=airline_list)
 
 if __name__ == '__main__': 
     port = int(os.environ.get('PORT',5000))
