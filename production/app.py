@@ -141,6 +141,5 @@ def predict(): # Make prediction based on selected values
     return render_template('webpage.html',user_prompt='For a flight to {}'.format(airport_list[airport_index]) + ' on {}'.format(airline_list[airline_index]), prediction_text='Expected flight delay time is {}'.format(delay) + ' minutes', cancellation_text='The likelihood of cancellation is {}'.format(cancellation) + '%', airport_list=airport_list, airline_list=airline_list)
 
 if __name__ == '__main__': 
-    port = int(os.environ.get('PORT',5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
     
