@@ -14,7 +14,7 @@ In [Part 1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/
 
 
 
-In [Part 2.1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_2.1_Modelling_Linear.ipynb), processed data was modelling using a linear model and XGBoost. The models were evaluated and compared based on a number of metrics. Despite it's interpretability, the linear model was not performant. Therefore, we attempt to model the data using a neural network was
+In [Part 2.1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_2.1_Modelling_Linear.ipynb), processed data was modelled using a linear model and XGBoost. The models were evaluated and compared based on a number of metrics. Despite it's interpretability, the linear model was not performant. Therefore, we attempt to model the data using a neural network was
 
 
 
