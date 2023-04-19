@@ -131,7 +131,7 @@ def predict(): # Make prediction based on selected values
     #Prediction Model running
     delay, cancellation = run_pred(airport_index, airline_index)
 
-    return render_template('webpage.html', prediction_text='Expected flight delay time is {}'.format(delay) + ' minutes', cancellation_text='The likelihood of cancellation is {}'.format(cancellation), airport_list=airport_list, airline_list=airline_list)
+    return render_template('webpage.html',user_prompt='For a(n) {}'.format(airline_list[airline_index]) + ' flight to {}'.format(airport_list[airport_index]), prediction_text='Expected flight delay time is {}'.format(delay) + ' minutes', cancellation_text='The likelihood of cancellation is {}'.format(cancellation), airport_list=airport_list, airline_list=airline_list)
 
 if __name__ == '__main__': 
     port = int(os.environ.get('PORT',5000))
