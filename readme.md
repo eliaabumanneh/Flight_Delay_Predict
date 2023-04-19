@@ -29,6 +29,8 @@ In [Part 2.2](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bi
 
 In [Part 3](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_3_User_interface.ipynb), a user interface (in juypter noteobok) was created to allow for custom predictions. Future porting of the model (eg: creating a Flask/Django deployment) would only require viewing this notebook. 
 
+A [Flask app](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/production/app.py) was created using Python that uses an HTML page for user interaction. It was deployed locally. Below is a sample use case: 
+
 
 
 
