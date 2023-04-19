@@ -21,6 +21,7 @@ The models were evaluated and compared based on their MSE, RMSE, MAE and R^2 met
 
 In [Part 2.2](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_2.2_Keras_Modelling-No-Clipping-No-Weather.ipynb), a Keras model was created, trained and used to make predictions. The Keras model performed better than the linear models. The predictions were evaluated and compared with the linear models. The model's architecture and weights were saved for future use. 
 ![image](https://user-images.githubusercontent.com/59853149/233199863-4e9303d9-bd8e-4ced-ae39-2c69e8b2d9e7.png)
+![image](https://user-images.githubusercontent.com/59853149/233201100-9bcf824a-8a22-4d4a-b371-f594c9d8fa87.png)
 
 
 
