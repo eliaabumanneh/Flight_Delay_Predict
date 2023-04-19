@@ -13,14 +13,13 @@ In [Part 1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/
 
 
 In [Part 2.1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_2.1_Modelling_Linear.ipynb), processed data was modelled using an OLS linear model and XGBoost. Data was transformed logarithmically to fit a normal distribution before modelling.
-![image](https://user-images.githubusercontent.com/59853149/233200473-6287324a-a4f6-46f6-97db-dea9b0d68f5d.png)
-![image](https://user-images.githubusercontent.com/59853149/233200580-72ae10f0-59de-4d8d-9119-1bfe30f1af95.png)
-
+![1](https://user-images.githubusercontent.com/59853149/233203925-5fe57cbd-a5c2-47e7-b5db-53be3c7f4745.png)
+![2](https://user-images.githubusercontent.com/59853149/233204204-368b7edb-264c-4461-9be8-7c4ac2b5dc90.png)
 
 The models were evaluated and compared based on their MSE, RMSE, MAE and R^2 metrics. Despite their interpretability, the linear models were not performant. Therefore, we attempt to model the data using a neural network.
 
 In [Part 2.2](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_2.2_Keras_Modelling-No-Clipping-No-Weather.ipynb), a Keras model was created, trained and used to make predictions. The Keras model performed better than the linear models. The predictions were evaluated and compared with the linear models. The model's architecture and weights were saved for future use. 
-![1](https://user-images.githubusercontent.com/59853149/233203648-dda412bf-afb7-465b-a2f9-abf21534c96f.png)
+![image](https://user-images.githubusercontent.com/59853149/233199863-4e9303d9-bd8e-4ced-ae39-2c69e8b2d9e7.png)
 ![image](https://user-images.githubusercontent.com/59853149/233201100-9bcf824a-8a22-4d4a-b371-f594c9d8fa87.png)
 
 
