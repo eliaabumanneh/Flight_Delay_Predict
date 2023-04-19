@@ -13,8 +13,9 @@ In [Part 1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/
 
 
 In [Part 2.1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_2.1_Modelling_Linear.ipynb), processed data was modelled using an OLS linear model and XGBoost. Data was transformed logarithmically to fit a normal distribution before modelling.
-![image](https://user-images.githubusercontent.com/59853149/233200135-468c2df1-8b47-49e6-9ea8-a9b218db7e15.png)
-![image](https://user-images.githubusercontent.com/59853149/233200245-1f7163c3-5ad4-4b59-a83c-98ef10dbf274.png)
+![image](https://user-images.githubusercontent.com/59853149/233200473-6287324a-a4f6-46f6-97db-dea9b0d68f5d.png)
+![image](https://user-images.githubusercontent.com/59853149/233200580-72ae10f0-59de-4d8d-9119-1bfe30f1af95.png)
+
 
 The models were evaluated and compared based on their MSE, RMSE, MAE and R^2 metrics. Despite their interpretability, the linear models were not performant. Therefore, we attempt to model the data using a neural network.
 
