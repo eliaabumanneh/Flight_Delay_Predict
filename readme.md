@@ -65,7 +65,6 @@ A [Flask app](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/pr
 * Matplotlib
 * Xgboost
 * Statsmodels
-* Keras
 
 # Legal
 
