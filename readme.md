@@ -9,12 +9,12 @@ User inputs their origin airport, destination and airline. The tool predicts the
 # Project Walkthrough
 A tool that allows users to get a prediction on the expected delay of their flight and the liklihood of cancellation using historical data. 
 
-In [Part 1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_1_Data_Processing.ipynb), Data was collected and pre-processed.
+In [Part 1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_1_Data_Processing.ipynb), data was collected and pre-processed.
 
 
 
 
-In [Part 2.1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_2.1_Modelling_Linear.ipynb), the data was modelling using a linear model and XGBoost. The models were evaluated and compared based on a number of metrics. Despite it's interpretability, the linear model was not performant. Therefore, we attempt to model the data using a neural network was
+In [Part 2.1](https://github.com/eliaabumanneh/Flight_Delay_Predict/blob/main/bin/Part_2.1_Modelling_Linear.ipynb), processed data was modelling using a linear model and XGBoost. The models were evaluated and compared based on a number of metrics. Despite it's interpretability, the linear model was not performant. Therefore, we attempt to model the data using a neural network was
 
 
 
